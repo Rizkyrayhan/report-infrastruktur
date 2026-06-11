@@ -12,6 +12,13 @@ enum Role {
   ADMIN
 }
 
+enum ReportStatus {
+  PENDING
+  PROCESSED
+  COMPLETED
+  REJECTED
+}
+
 model User {
   id        String   @id @default(uuid())
   name      String
@@ -19,6 +26,36 @@ model User {
   password  String
   role      Role     @default(USER)
   phone     String?
+  reports   Report[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  reports     Report[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Report {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  address     String
+  latitude    Float?
+  longitude   Float?
+  imageUrl    String?
+  status      ReportStatus @default(PENDING)
+  
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  
+  categoryId  String
+  category    Category     @relation(fields: [categoryId], references: [id])
+  
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
