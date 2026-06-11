@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 @theme inline {
@@ -10,12 +10,23 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Government Style Colors */
+  --color-gov-navy: #1e3a8a;
+  --color-gov-navy-hover: #1e40af;
+  --color-gov-light: #f1f5f9;
+  --color-gov-border: #e2e8f0;
+  
+  /* Status Colors */
+  --color-status-wait: #ef4444;
+  --color-status-process: #eab308;
+  --color-status-done: #22c55e;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f8fafc;
   }
 }
 
