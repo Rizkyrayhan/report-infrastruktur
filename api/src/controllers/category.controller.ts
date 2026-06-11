@@ -13,3 +13,23 @@ export const getCategories = async (req: Request, res: Response) => {
     return res.status(500).json(errorResponse('Terjadi kesalahan pada server'));
   }
 };
+
+export const createCategory = async (req: Request, res: Response) => {
+  try {
+    const { name, description } = req.body;
+    
+    const existingCategory = await prisma.category.findUnique({ where: { name } });
+    if (existingCategory) {
+      return res.status(400).json(errorResponse('Kategori sudah ada'));
+    }
+
+    const category = await prisma.category.create({
+      data: { name, description }
+    });
+
+    return res.status(201).json(successResponse(category, 'Kategori berhasil ditambahkan'));
+  } catch (error) {
+    console.error('[Create Category Error]', error);
+    return res.status(500).json(errorResponse('Terjadi kesalahan pada server'));
+  }
+};
