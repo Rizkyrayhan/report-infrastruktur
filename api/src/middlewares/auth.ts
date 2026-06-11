@@ -29,3 +29,10 @@ export const verifyToken = (req: AuthRequest, res: Response, next: NextFunction)
     return res.status(401).json(errorResponse('Unauthorized: Token is invalid or expired'));
   }
 };
+
+export const verifyAdmin = (req: AuthRequest, res: Response, next: NextFunction) => {
+  if (req.user && req.user.role === 'ADMIN') {
+    return next();
+  }
+  return res.status(403).json(errorResponse('Forbidden: Requires Admin privileges'));
+};
