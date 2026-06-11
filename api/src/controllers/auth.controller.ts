@@ -40,3 +40,34 @@ export const login = async (req: Request, res: Response) => {
     return res.status(500).json(errorResponse('Terjadi kesalahan pada server'));
   }
 };
+
+export const register = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password, phone } = req.body;
+
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json(errorResponse('Email sudah terdaftar'));
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        phone
+      }
+    });
+
+    return res.status(201).json(successResponse({
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email
+    }, 'Registrasi berhasil'));
+  } catch (error) {
+    console.error('[Register Error]', error);
+    return res.status(500).json(errorResponse('Terjadi kesalahan pada server'));
+  }
+};
