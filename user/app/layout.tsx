@@ -1,6 +1,6 @@
 import Header from './components/Header';
 
-export default function UserLayout({
+import Footer from '../components/Footer';\n\nexport default function UserLayout({
   children,
 }: {
   children: React.ReactNode;
