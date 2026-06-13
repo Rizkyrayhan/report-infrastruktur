@@ -1,10 +1,21 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
 import { Card, CardBody } from '../../components/ui/Card';
 
 export default function CekStatus() {
+  const router = useRouter();
+  const [reportId, setReportId] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!reportId.trim()) return alert('Masukkan ID Laporan terlebih dahulu');
+    
+    router.push(`/laporan/${reportId.trim()}`);
+  };
+
   return (
     <div className="max-w-xl mx-auto py-12">
       <div className="text-center mb-8">
@@ -13,8 +24,13 @@ export default function CekStatus() {
       </div>
       <Card>
         <CardBody>
-          <form className="flex flex-col space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <Input label="ID Laporan" placeholder="Contoh: REP-1234" />
+          <form className="flex flex-col space-y-4" onSubmit={handleSearch}>
+            <Input 
+              label="ID Laporan" 
+              placeholder="Contoh: REP-1234" 
+              value={reportId}
+              onChange={(e) => setReportId(e.target.value)}
+            />
             <Button type="submit">Cari Laporan</Button>
           </form>
         </CardBody>
