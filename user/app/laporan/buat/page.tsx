@@ -12,6 +12,22 @@ export default function BuatLaporan() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert('Ukuran foto maksimal 2MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,13 +38,14 @@ export default function BuatLaporan() {
       title,
       description,
       location,
+      imageUrl: imageUrl || undefined,
       status: 'PENDING' as const,
       createdAt: new Date().toISOString()
     };
     
     saveReport(newReport);
-    alert(`Laporan berhasil dibuat! ID Laporan: ${newReport.id}`);
-    router.push('/status');
+    alert(`Laporan berhasil dibuat! ID Laporan Anda adalah: ${newReport.id}`);
+    router.push(`/laporan/${newReport.id}`);
   };
 
   return (
@@ -61,9 +78,24 @@ export default function BuatLaporan() {
             />
             <div className="pt-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">Unggah Foto (Opsional)</label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:bg-gray-50 transition-colors cursor-pointer">
-                <span className="text-sm text-gray-500">Klik untuk memilih foto atau seret ke sini</span>
-              </div>
+              {imageUrl ? (
+                <div className="relative w-full h-48 border rounded-lg overflow-hidden mb-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                  <button 
+                    type="button"
+                    onClick={() => setImageUrl(null)}
+                    className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded-full text-xs font-bold w-6 h-6 flex items-center justify-center hover:bg-red-700"
+                  >
+                    X
+                  </button>
+                </div>
+              ) : (
+                <label className="block border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:bg-gray-50 transition-colors cursor-pointer">
+                  <span className="text-sm text-gray-500">Klik untuk memilih foto (Maks 2MB)</span>
+                  <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                </label>
+              )}
             </div>
             <div className="pt-6 border-t mt-6">
               <Button fullWidth type="submit">Kirim Laporan</Button>

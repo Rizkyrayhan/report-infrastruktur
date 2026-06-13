@@ -1,10 +1,10 @@
 'use client';
 import React, { useEffect, useState, use } from 'react';
-import { Card, CardBody, CardHeader } from '../../../../components/ui/Card';
-import StatusTracker from '../../../../components/StatusTracker';
-import { ReportStatus } from '../../../../types/status';
-import { getReportById } from '../../../../utils/storage';
-import { Report } from '../../../../types/report';
+import { Card, CardBody, CardHeader } from '../../../components/ui/Card';
+import StatusTracker from '../../../components/StatusTracker';
+import { ReportStatus } from '../../../types/status';
+import { getReportById } from '../../../utils/storage';
+import { Report } from '../../../types/report';
 
 export default function DetailLaporan({ params }: { params: Promise<{ id: string }> | { id: string } }) {
   // Handle async params in newer Next.js versions
@@ -58,6 +58,15 @@ export default function DetailLaporan({ params }: { params: Promise<{ id: string
             <span className="block text-sm text-gray-500">Deskripsi</span>
             <p className="text-gray-800 mt-1 whitespace-pre-wrap">{report.description}</p>
           </div>
+          {report.imageUrl && (
+            <div>
+              <span className="block text-sm text-gray-500 mb-2">Foto Laporan</span>
+              <div className="border rounded-lg overflow-hidden w-full max-w-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={report.imageUrl} alt="Foto Bukti" className="w-full h-auto object-cover" />
+              </div>
+            </div>
+          )}
           <div>
             <span className="block text-sm text-gray-500">Tanggal Dibuat</span>
             <p className="text-gray-800 mt-1">{new Date(report.createdAt).toLocaleString('id-ID')}</p>
