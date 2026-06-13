@@ -14,10 +14,10 @@ export default function Hero() {
             Sampaikan laporan kerusakan jalan, jembatan, atau fasilitas umum lainnya di wilayah Anda. Kami memastikan setiap laporan ditindaklanjuti secara transparan.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Link href="/user/laporan/buat" className="bg-white text-blue-900 hover:bg-gray-50 px-6 py-3 rounded-md font-bold text-lg text-center transition-colors shadow-sm">
+            <Link href="/laporan/buat" className="bg-white text-blue-900 hover:bg-gray-50 px-6 py-3 rounded-md font-bold text-lg text-center transition-colors shadow-sm">
               Buat Laporan Sekarang
             </Link>
-            <Link href="/user/status" className="bg-transparent border-2 border-blue-300 text-white hover:bg-blue-800 px-6 py-3 rounded-md font-bold text-lg text-center transition-colors">
+            <Link href="/status" className="bg-transparent border-2 border-blue-300 text-white hover:bg-blue-800 px-6 py-3 rounded-md font-bold text-lg text-center transition-colors">
               Cek Status Laporan
             </Link>
           </div>

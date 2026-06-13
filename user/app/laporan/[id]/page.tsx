@@ -37,7 +37,7 @@ export default function DetailLaporan({ params }: { params: Promise<{ id: string
       <Card className="mb-6">
         <CardBody>
           <h2 className="font-bold text-gray-900 text-lg mb-4">Progres Penanganan</h2>
-          <StatusTracker currentStatus={ReportStatus.PROCESSING} />
+          <StatusTracker currentStatus={report.status as ReportStatus} />
         </CardBody>
       </Card>
       
@@ -48,15 +48,19 @@ export default function DetailLaporan({ params }: { params: Promise<{ id: string
         <CardBody className="space-y-4">
           <div>
             <span className="block text-sm text-gray-500">Judul</span>
-            <span className="font-medium">Lampu jalan mati di perempatan</span>
+            <span className="font-medium">{report.title}</span>
           </div>
           <div>
             <span className="block text-sm text-gray-500">Lokasi</span>
-            <span className="font-medium">Perempatan Sukarame, Bandar Lampung</span>
+            <span className="font-medium">{report.location}</span>
           </div>
           <div>
             <span className="block text-sm text-gray-500">Deskripsi</span>
-            <p className="text-gray-800 mt-1">Sudah dua minggu lampu lalu lintas dan penerangan jalan padam, sangat rawan kecelakaan di malam hari.</p>
+            <p className="text-gray-800 mt-1 whitespace-pre-wrap">{report.description}</p>
+          </div>
+          <div>
+            <span className="block text-sm text-gray-500">Tanggal Dibuat</span>
+            <p className="text-gray-800 mt-1">{new Date(report.createdAt).toLocaleString('id-ID')}</p>
           </div>
         </CardBody>
       </Card>

@@ -19,19 +19,19 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <Link 
-              href="/user" 
+              href="/" 
               className="text-gray-700 hover:text-blue-900 font-semibold px-3 py-2 rounded-md transition-colors border-b-2 border-transparent hover:border-blue-900"
             >
               Beranda
             </Link>
             <Link 
-              href="/user/laporan/buat" 
+              href="/laporan/buat" 
               className="text-gray-700 hover:text-blue-900 font-semibold px-3 py-2 rounded-md transition-colors border-b-2 border-transparent hover:border-blue-900"
             >
               Buat Laporan
             </Link>
             <Link 
-              href="/user/status" 
+              href="/status" 
               className="text-gray-700 hover:text-blue-900 font-semibold px-3 py-2 rounded-md transition-colors border-b-2 border-transparent hover:border-blue-900"
             >
               Cek Status

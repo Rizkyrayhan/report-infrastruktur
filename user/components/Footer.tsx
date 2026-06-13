@@ -13,11 +13,11 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Tautan Cepat</h3>
+            <h3 className="text-white font-bold text-lg mb-4">Navigasi</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/user" className="hover:text-white transition-colors">Beranda</Link></li>
-              <li><Link href="/user/laporan/buat" className="hover:text-white transition-colors">Buat Laporan</Link></li>
-              <li><Link href="/user/status" className="hover:text-white transition-colors">Cek Status Laporan</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">Beranda</Link></li>
+              <li><Link href="/laporan/buat" className="hover:text-white transition-colors">Buat Laporan</Link></li>
+              <li><Link href="/status" className="hover:text-white transition-colors">Cek Status Laporan</Link></li>
             </ul>
           </div>
           <div>

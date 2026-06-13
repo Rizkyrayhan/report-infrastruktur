@@ -957,6 +957,10 @@
     letter-spacing: var(--tracking-wider);
   }
 
+  .whitespace-pre-wrap {
+    white-space: pre-wrap;
+  }
+
   .text-blue-100 {
     color: var(--color-blue-100);
   }
